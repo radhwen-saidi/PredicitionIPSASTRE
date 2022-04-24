@@ -1,0 +1,20 @@
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\bin\Debug\ProjetChoixIps.exe.config
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\bin\Debug\ProjetChoixIps.exe
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\bin\Debug\ProjetChoixIps.pdb
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\bin\Debug\Newtonsoft.Json.dll
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\bin\Debug\Newtonsoft.Json.xml
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\obj\Debug\ProjetChoixIps.csprojAssemblyReference.cache
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\obj\Debug\ProjetChoixIps.csproj.CoreCompileInputs.cache
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\obj\Debug\ProjetChoixIps.csproj.CopyComplete
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\obj\Debug\ProjetChoixIps.exe
+C:\Users\wgharsalli\source\repos\ProjetChoixIps\ProjetChoixIps\obj\Debug\ProjetChoixIps.pdb
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\bin\Debug\ProjetChoixIps.exe.config
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\bin\Debug\ProjetChoixIps.exe
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\bin\Debug\ProjetChoixIps.pdb
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\bin\Debug\Newtonsoft.Json.dll
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\bin\Debug\Newtonsoft.Json.xml
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\obj\Debug\ProjetChoixIps.csprojAssemblyReference.cache
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\obj\Debug\ProjetChoixIps.csproj.CoreCompileInputs.cache
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\obj\Debug\ProjetChoixIps.csproj.CopyComplete
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\obj\Debug\ProjetChoixIps.exe
+C:\Users\labie\Desktop\Nouveau dossier\ProjetChoixIps-2\ProjetChoixIps\obj\Debug\ProjetChoixIps.pdb

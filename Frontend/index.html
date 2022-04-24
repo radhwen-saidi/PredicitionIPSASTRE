@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTRE IPS</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/item-series.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <link rel="stylesheet" href="style/style.css" />
+    <link rel="stylesheet" href="style/range.css" />
+
+    <script src="dataset/datasetEtu.json"></script>
+    <script src="dataset/hypotheses.js"></script>
+    <script src="dataset/dataset.js"></script>
+    <script src="Views/propChart.js"></script>
+    <script src="Views/detailChart.js"></script>
+    <script src="services/calcScore.js"></script>
+    <script src="services/controller.js"></script>
+</head>
+<body>
+
+    <div class="containerHead">
+        <div class="py-5 text-center">
+            <h4 class="wordCarousel">
+                <span style="color:#0094ff;font-weight:bolder;">Choix</span>
+                <div class="divclass">
+                    <!-- Use classes 2,3, or 4 to match the number of words -->
+                    <ul class="flip2">
+                        <li class="flipflop">ASTRE</li>
+                        <li class="flipflop">IPS</li>
+                    </ul>
+                </div>
+            </h4>
+            <img class="d-block mx-auto mb-4" src="img/careerChoice.png" alt="" width="200">
+            <p class="lead">
+                Ce projet présente le résultat de nos hypothèses concernant le choix de le filière d'études, ASTRE/IPS, par les étudiants de l'Ensim. Vous pourrez modifier les poids de chaque hypothèse en bougeant les curseurs pour chaque question avec 0 signifie que l'hypothèse n'aura aucune implication sur le résultat et 10 signifie que l'hypothèse est la plus importante. La page proportions presente la prédiction sur l'orientation de la étudiants de classe vers ASTRE ou IPS. La page détails affiche chaque étudiant avec son score. Pour réinitialiser les poids, rechargez la page.
+            </p>
+        </div>
+    </div>
+    <div class="myDIV">
+        <a id="Formulaire" class="btn active" onclick="changeView('Formulaire')">Formulaire</a>
+        <a id="Proportions" class="btn" onclick="changeView('Proportions')">Proportions</a>
+        <a id="Details" class="btn" onclick="changeView('Details')">Détails</a>
+    </div>
+
+    <form class="row justify-content-center padtop" id="formControls">
+        <h3 class="title">Parcours avant ENSIM</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Prépa BL</label>
+                <input type="range" class="form-control-range customrange" name="Q13" id="Q13" min="0" max="10" value="4" onchange="update()" oninput="Q13Out.value = Q13.value ">
+                <output name="Q13Out" id="Q13Out">4</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">DUT</label>
+                <input type="range" class="form-control-range customrange" name="Q14" id="Q14" min="0" max="10" value="4" onchange="update()" oninput="Q14Out.value = Q14.value ">
+                <output name="Q14Out" id="Q14Out">4</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">BTS</label>
+                <input type="range" class="form-control-range customrange" name="Q15" id="Q15" min="0" max="10" value="4" onchange="update()" oninput="Q15Out.value = Q15.value ">
+                <output name="Q15Out" id="Q15Out">4</output>
+            </div>
+        </div>
+
+
+        <h3 class="title">Interets par les actualités technologiques</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">aucun interet</label>
+                <input type="range" class="form-control-range customrange" name="Q21" id="Q21" min="0" max="10" value="7" onchange="update()" oninput="Q21Out.value = Q21.value ">
+                <output name="Q21Out" id="Q21Out">7</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Plutot interessé</label>
+                <input type="range" class="form-control-range customrange" name="Q22" id="Q22" min="0" max="10" value="7" onchange="update()" oninput="Q22Out.value = Q22.value ">
+                <output name="Q22Out" id="Q22Out">7</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Très interessé</label>
+                <input type="range" class="form-control-range customrange" name="Q23" id="Q23" min="0" max="10" value="7" onchange="update()" oninput="Q23Out.value = Q23.value ">
+                <output name="Q23Out" id="Q23Out">7</output>
+            </div>
+        </div>
+
+
+        <h3 class="title">Interets par les activités artistiques</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">aucun interet</label>
+                <input type="range" class="form-control-range customrange" name="Q31" id="Q31" min="0" max="10" value="7" onchange="update()" oninput="Q31Out.value = Q31.value ">
+                <output name="Q31Out" id="Q31Out">7</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">plutot interessé</label>
+                <input type="range" class="form-control-range customrange" name="Q32" id="Q32" min="0" max="10" value="7" onchange="update()" oninput="Q32Out.value = Q32.value ">
+                <output name="Q32Out" id="Q32Out">7</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Très interessé</label>
+                <input type="range" class="form-control-range customrange" name="Q34" id="Q34" min="0" max="10" value="7" onchange="update()" oninput="Q34Out.value = Q34.value ">
+                <output name="Q34Out" id="Q34Out">7</output>
+            </div>
+        </div>
+
+        <h3 class="title">Indicateur de créativité</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Moins créatif</label>
+                <input type="range" class="form-control-range customrange" name="Q41" id="Q41" min="0" max="10" value="6" onchange="update()" oninput="Q41Out.value = Q41.value ">
+                <output name="Q41Out" id="Q41Out">6</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Très créatif</label>
+                <input type="range" class="form-control-range customrange" name="Q43" id="Q43" min="0" max="10" value="6" onchange="update()" oninput="Q43Out.value = Q43.value ">
+                <output name="Q43Out" id="Q43Out">6</output>
+            </div>
+        </div>
+
+
+        <h3 class="title">Associations étudiantes</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">EnsimElec - Enigma</label>
+                <input type="range" class="form-control-range customrange" name="Q51" id="Q51" min="0" max="10" value="5" onchange="update()" oninput="Q51Out.value = Q51.value ">
+                <output name="Q51Out" id="Q51Out">5</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Jensim - BDE - BDLC</label>
+                <input type="range" class="form-control-range customrange" name="Q52" id="Q52" min="0" max="10" value="5" onchange="update()" oninput="Q52Out.value = Q52.value ">
+                <output name="Q52Out" id="Q52Out">5</output>
+            </div>
+        </div>
+
+
+        <h3 class="title">Participation aux soirées de l'Ensim</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Rarement</label>
+                <input type="range" class="form-control-range customrange" name="Q61" id="Q61" min="0" max="10" value="4" onchange="update()" oninput="Q61Out.value = Q61.value ">
+                <output name="Q61Out" id="Q61Out">4</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Fréquemment</label>
+                <input type="range" class="form-control-range customrange" name="Q62" id="Q62" min="0" max="10" value="4" onchange="update()" oninput="Q62Out.value = Q62.value ">
+                <output name="Q62Out" id="Q62Out">4</output>
+            </div>
+        </div>
+
+        <h3 class="title">Avoir un compte chez netflix/amazon</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Oui</label>
+                <input type="range" class="form-control-range customrange" name="Q81" id="Q81" min="0" max="10" value="7" onchange="update()" oninput="Q81Out.value = Q81.value ">
+                <output name="Q81Out" id="Q81Out">7</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Non</label>
+                <input type="range" class="form-control-range customrange" name="Q82" id="Q82" min="0" max="10" value="7" onchange="update()" oninput="Q82Out.value = Q82.value ">
+                <output name="Q82Out" id="Q82Out">7</output>
+            </div>
+        </div>
+
+        <h3 class="title">Système d'exploitation préferé</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Windows</label>
+                <input type="range" class="form-control-range customrange" name="Q91" id="Q91" min="0" max="10" value="10" onchange="update()" oninput="Q91Out.value = Q91.value ">
+                <output name="Q91Out" id="Q91Out">10</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Mac</label>
+                <input type="range" class="form-control-range customrange" name="Q92" id="Q92" min="0" max="10" value="10" onchange="update()" oninput="Q92Out.value = Q92.value ">
+                <output name="Q92Out" id="Q92Out">10</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Linux</label>
+                <input type="range" class="form-control-range customrange" name="Q93" id="Q93" min="0" max="10" value="10" onchange="update()" oninput="Q93Out.value = Q93.value ">
+                <output name="Q93Out" id="Q93Out">10</output>
+            </div>
+        </div>
+
+        <h3 class="title">Avoir fait un démontage d'un pc</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Plusieurs fois</label>
+                <input type="range" class="form-control-range customrange" name="Q101" id="Q101" min="0" max="10" value="8" onchange="update()" oninput="Q101Out.value = Q101.value ">
+                <output name="Q101Out" id="Q101Out">8</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">Au plus 1 seule fois</label>
+                <input type="range" class="form-control-range customrange" name="Q103" id="Q103" min="0" max="10" value="8" onchange="update()" oninput="Q103Out.value = Q103.value ">
+                <output name="Q103Out" id="Q103Out">8</output>
+            </div>
+        </div>
+
+
+        <h3 class="title">Avoir la performance dans</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">CPU</label>
+                <input type="range" class="form-control-range customrange" name="Q121" id="Q121" min="0" max="10" value="6" onchange="update()" oninput="Q121Out.value = Q121.value ">
+                <output name="Q121Out" id="Q121Out">6</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">GPU</label>
+                <input type="range" class="form-control-range customrange" name="Q122" id="Q122" min="0" max="10" value="6" onchange="update()" oninput="Q122Out.value = Q122.value ">
+                <output name="Q122Out" id="Q122Out">6</output>
+            </div>
+        </div>
+
+        <h3 class="title">Travailler</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">équipe</label>
+                <input type="range" class="form-control-range customrange" name="Q141" id="Q141" min="0" max="10" value="4" onchange="update()" oninput="Q141Out.value = Q141.value ">
+                <output name="Q141Out" id="Q141Out">4</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">seul</label>
+                <input type="range" class="form-control-range customrange" name="Q142" id="Q142" min="0" max="10" value="4" onchange="update()" oninput="Q142Out.value = Q142.value ">
+                <output name="Q142Out" id="Q142Out">4</output>
+            </div>
+        </div>
+
+        <h3 class="title">Team</h3>
+        <div class="containerInput">
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">clavier</label>
+                <input type="range" class="form-control-range customrange" name="Q171" id="Q171" min="0" max="10" value="8" onchange="update()" oninput="Q171Out.value = Q171.value ">
+                <output name="Q171Out" id="Q171Out">8</output>
+            </div>
+            <div class="form-group col-4 col-md-2 mx-2 text-center">
+                <label for="formControlRange">souris</label>
+                <input type="range" class="form-control-range customrange" name="Q172" id="Q172" min="0" max="10" value="8" onchange="update()" oninput="Q172Out.value = Q172.value ">
+                <output name="Q172Out" id="Q172Out">8</output>
+            </div>
+        </div>
+
+
+        <div class="wrapper">
+            <div class="link_wrapper" style="cursor: pointer;">
+                <a  class="linkelem" onclick="changeView('Proportions')">Resultats</a>
+                <div class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.832 268.832">
+                        <path d="M265.17 125.577l-80-80c-4.88-4.88-12.796-4.88-17.677 0-4.882 4.882-4.882 12.796 0 17.678l58.66 58.66H12.5c-6.903 0-12.5 5.598-12.5 12.5 0 6.903 5.597 12.5 12.5 12.5h213.654l-58.66 58.662c-4.88 4.882-4.88 12.796 0 17.678 2.44 2.44 5.64 3.66 8.84 3.66s6.398-1.22 8.84-3.66l79.997-80c4.883-4.882 4.883-12.796 0-17.678z" />
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <div id="proportionChart" class="hidepage">
+        <figure class="highcharts-figure">
+            <div id="container1" ></div>
+        </figure>
+    </div>
+
+    <div id="detailChart" class="hidepage" 
+        <figure class="highcharts-figure">
+            <div id="container2" style="height: 750px;width:100%"></div>
+        </figure>
+    </div>
+</body>
+</html>

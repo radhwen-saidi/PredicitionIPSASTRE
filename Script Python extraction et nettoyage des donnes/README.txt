@@ -1,0 +1,3 @@
+-Le fichier IPSASTRE-CLEANDATA est à ouvrir avec notebook jupyter.
+- le fichier csv data brut est le résultat des réponses de tous les étudiants 3A sur le formulaire.
+- Le fichier JSON output Python est le resultat après l'extraction et nettoyage des données 
